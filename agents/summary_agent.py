@@ -1,5 +1,18 @@
-def summary_agent(data, risk):
-    symptoms = ", ".join(data.get("symptoms", []))
-    duration = data.get("duration", "")
+import requests
 
-    return f"Patient presents with {symptoms} for {duration}. Risk level is {risk}."
+def summary_agent(data, risk):
+    prompt = f"""
+Given the structured patient data:
+{data}
+
+Risk level:
+{risk}
+
+Write a short clinical-style summary.
+"""
+    response = requests.post(
+        "http://localhost:11434/api/generate",
+        json={"model": "llama3", "prompt": prompt, "stream": False}
+    )
+
+    return response.json()["response"]

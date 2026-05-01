@@ -1,20 +1,28 @@
+import json
+import requests
+
 def extract_agent(text):
-    text = text.lower()
+    prompt = f"""
+Extract structured clinical information from the input.
 
-    symptoms = []
-    duration = ""
-    medication = ""
+Input:
+{text}
 
-    if "fever" in text:
-        symptoms.append("fever")
-    if "headache" in text:
-        symptoms.append("headache")
+Return ONLY valid JSON:
+{{
+  "symptoms": [],
+  "duration": "",
+  "medication": ""
+}}
+"""
+    response = requests.post(
+        "http://localhost:11434/api/generate",
+        json={"model": "llama3", "prompt": prompt, "stream": False}
+    )
 
-    if "3 days" in text:
-        duration = "3 days"
+    result = response.json()["response"]
 
-    return {
-        "symptoms": symptoms,
-        "duration": duration,
-        "medication": medication
-    }
+    try:
+        return json.loads(result)
+    except Exception:
+        return {"symptoms": [], "duration": "", "medication": "", "raw_output": result}
