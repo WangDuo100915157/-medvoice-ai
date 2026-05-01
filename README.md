@@ -35,10 +35,10 @@ uvicorn api.server:app --reload
 ## Demo
 
 ### API Overview
-![Overview](./截屏2026-05-01 下午4.20.45.png)
+![Overview](./demo-1.png)
 
 ### Input Example
-![Input](./截屏2026-05-01 下午4.22.28.png)
+![Input](./demo-2.png)
 
 ### Output Result
-![Output](./截屏2026-05-01 下午4.22.45.png)
+![Output](./demo-3.png)
