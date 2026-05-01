@@ -31,3 +31,14 @@ Example:
 ## Run
 
 uvicorn api.server:app --reload
+
+## Demo
+
+### API Overview
+![Overview](./截屏2026-05-01 下午4.20.45.png)
+
+### Input Example
+![Input](./截屏2026-05-01 下午4.22.28.png)
+
+### Output Result
+![Output](./截屏2026-05-01 下午4.22.45.png)
